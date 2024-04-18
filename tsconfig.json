@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2019",
-    "module": "CommonJS",
+    "module": "ESNext",
     "strict": true,
     "importHelpers": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,7 +19,5 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  },
-  "include": ["src"],
-  "exclude": ["lib", "dist"]
+  }
 }

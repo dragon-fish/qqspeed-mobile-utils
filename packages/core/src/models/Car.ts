@@ -1,4 +1,4 @@
-import { QGameMode } from './GameMode.js'
+import { QGameMode } from './GameMode'
 
 export interface QCarAttributes {
   name: string

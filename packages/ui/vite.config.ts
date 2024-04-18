@@ -34,7 +34,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/index.ts',
-      name: 'SpeedDrifter',
+      name: 'QQSpeedM',
       fileName: 'index',
       formats: ['es', 'umd'],
     },
@@ -47,5 +47,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+  },
+  server: {
+    host: true,
   },
 })

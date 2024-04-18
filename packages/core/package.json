@@ -1,27 +1,29 @@
 {
-  "name": "qqspeedm",
+  "name": "@qqspeedm/core",
   "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "type": "module",
-  "private": true,
   "scripts": {
-    "dev": "run-p dev:*",
-    "dev:core": "pnpm -F core dev",
-    "dev:ui": "pnpm -F ui dev"
+    "dev": "tsc --watch",
+    "build:lib": "tsc",
+    "build:lua": "tstl"
   },
   "keywords": [],
   "author": "Dragon-Fish <dragon-fish@qq.com>",
-  "files": [],
+  "files": [
+    "lib",
+    "dist"
+  ],
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.12.7",
-    "@vue/language-plugin-pug": "^1.8.27",
-    "npm-run-all2": "^6.1.2",
-    "prettier": "^3.2.5",
     "tsx": "^4.7.2",
     "typescript": "^5.4.5",
-    "vite": "^5.2.9"
+    "typescript-to-lua": "^1.25.1",
+    "vite": "^5.2.9",
+    "vite-plugin-dts": "^3.8.3",
+    "vue": "^3.4.23"
   },
   "dependencies": {
     "tslib": "^2.6.2"

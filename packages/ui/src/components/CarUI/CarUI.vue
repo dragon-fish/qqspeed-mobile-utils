@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import {} from 'vue'
-import { QCar } from '@/models/Car.js'
+import { QCar } from '@qqspeedm/core/lib/models'
 
 const props = defineProps<{
   car: QCar

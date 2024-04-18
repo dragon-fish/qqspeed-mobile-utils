@@ -11,7 +11,7 @@ import {
   QCarAdaptability,
   QCarSkillBounsKind,
   QCarType,
-} from '@/models/Car'
+} from '@qqspeedm/core/lib/models'
 
 const nbCar = new QCar({
   name: '新手赛车',
