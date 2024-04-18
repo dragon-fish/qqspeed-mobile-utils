@@ -1,7 +1,7 @@
 import { QGameMode } from './GameMode'
 
 export interface QCarBase {
-  readonly carId?: number
+  readonly id?: number
   readonly name: string
   isSkin?: boolean
   type: QCarType // 赛车等级

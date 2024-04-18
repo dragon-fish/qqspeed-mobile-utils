@@ -7,6 +7,11 @@
     tr(v-for='(item, index) in speedStatistics' :key='index')
       td {{ item.label }}
       td {{ item.value }}
+  h2 动力
+  table
+    tr(v-for='(item, index) in powerStatistics' :key='index')
+      td {{ item.label }}
+      td {{ item.value }}
 </template>
 
 <script setup lang="ts">
@@ -60,6 +65,32 @@ const speedStatistics = computed(() => {
     })
   }
   return data
+})
+
+const powerStatistics = computed(() => {
+  const car = props.car
+  return [
+    {
+      label: '基础动力',
+      value: car.basePower,
+    },
+    {
+      label: '剩余基础动力',
+      value: car.leftBasePower,
+    },
+    {
+      label: '氮气动力',
+      value: car.cBoostPower,
+    },
+    {
+      label: '小喷动力',
+      value: car.wBoostPower,
+    },
+    {
+      label: '叠喷总动力',
+      value: car.combinedPower,
+    },
+  ]
 })
 
 const allSkillBouns = computed(() => {
