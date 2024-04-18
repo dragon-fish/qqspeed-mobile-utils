@@ -1,6 +1,6 @@
 # QQ Speed Mobile Utils
 
-> [!info]
+> [!warning]
 >
 > This project is still in development and is not yet ready for use.
 
