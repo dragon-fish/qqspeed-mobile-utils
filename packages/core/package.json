@@ -7,8 +7,9 @@
   "type": "module",
   "scripts": {
     "dev": "tsc --watch",
-    "build:lib": "tsc",
-    "build:lua": "tstl"
+    "build": "run-s build:lib build:lua",
+    "build:lib": "tsc --project tsconfig.json",
+    "build:lua": "tstl --project tsconfig.lua.json"
   },
   "keywords": [],
   "author": "Dragon-Fish <dragon-fish@qq.com>",
