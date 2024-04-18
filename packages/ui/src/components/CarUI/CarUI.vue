@@ -1,7 +1,7 @@
 <template lang="pug">
 .qq-speed-car(prose bg='white' border='1px solid #ccc' p='4' rounded='~' w='400px' max-w='full' shadow='md')
   h2 {{ car.name }}
-  p {{ car.attr.description || '-' }}
+  p {{ car.description || '-' }}
   h2 速度
   table
     tr(v-for='(item, index) in speedStatistics' :key='index')
@@ -49,7 +49,7 @@ const speedStatistics = computed(() => {
       value: car.cwwBoostSpeed,
     },
   ]
-  if (car.attr.wBoostSpeedMultipliers && car.attr.wBoostSpeedMultipliers[3]) {
+  if (car.wBoostSpeedMultipliers && car.wBoostSpeedMultipliers[3]) {
     data.push({
       label: 'CWWW',
       value: car.cwwwBoostSpeed,
@@ -65,8 +65,8 @@ const speedStatistics = computed(() => {
 const allSkillBouns = computed(() => {
   const car = props.car
   return car.skills.reduce((acc, skill) => {
-    if (skill.bounsKind === QCarSkillBounsKind.SPEED) {
-      acc += skill.bouns
+    if (skill.bounses === QCarSkillBounsKind.SPEED) {
+      // acc += skill.bounses.
     }
     return acc
   }, [])

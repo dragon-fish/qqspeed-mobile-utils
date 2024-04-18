@@ -1,7 +1,9 @@
 import { QGameMode } from './GameMode'
 
-export interface QCarAttributes {
-  name: string
+export interface QCarBase {
+  readonly carId?: number
+  readonly name: string
+  isSkin?: boolean
   type: QCarType // 赛车等级
   description: string
   baseSpeed: number // 平跑最高速
@@ -13,8 +15,12 @@ export interface QCarAttributes {
   cBoostPower: number // 氮气动力
   wBoostPower: number // 小喷动力
   /**
-   * 小喷速度倍率 (w)c(w)(w)(w)
-   *             0   1  2  3
+   * 小喷速度倍率
+   * ```
+   * (w)c(w)(w)(w)
+   *  ↑   ↑  ↑  ↑
+   *  0   1  2  3
+   * ```
    */
   wBoostSpeedMultipliers: number[]
   accelerationSeconds180: number // 0-180加速时间
@@ -26,6 +32,41 @@ export interface QCarAttributes {
   driftEnergyEfficiency: number // 集气效率
   skills: QCarSkill[] // 特性
   boostSpouts: number // 喷口数量
+}
+
+export class QCarBase {
+  constructor(init: Partial<QCarBase>) {
+    Object.assign(this, {
+      ...QCarBase.createDefaultAttributes(),
+      ...init,
+    })
+  }
+
+  static createDefaultAttributes() {
+    return {
+      name: '新手赛车',
+      type: QCarType.D,
+      description: '',
+      baseSpeed: 183,
+      cBoostSpeed: 252.5,
+      wBoostSpeed: 220.6,
+      cDurationSeconds: 3,
+      wDurationSeconds: 0.59,
+      basePower: 84.7,
+      cBoostPower: 47,
+      wBoostPower: 84.6,
+      wBoostSpeedMultipliers: [0.1, 0.5, 0.3, 0],
+      accelerationSeconds180: 4.18,
+      turnAroundSeconds: 4.02,
+      turnAroundSecondsWithStartUp: 4.12,
+      driftAroundSeconds: 2.06,
+      minSpeedWhileTurnAround: 164.1,
+      adaptabilities: [],
+      driftEnergyEfficiency: 0,
+      skills: [],
+      boostSpouts: 1,
+    } as QCarBase
+  }
 }
 
 export enum QCarType {
@@ -63,62 +104,23 @@ export enum QCarSkillBounsKind {
 }
 export interface QCarSkillBouns {
   kind: QCarSkillBounsKind
-  attribute: keyof QCarAttributes
+  attribute: keyof QCarBase
   value: number
 }
 
-export class QCar {
-  readonly name: string
-  readonly attr: QCarAttributes
-
-  constructor(init: { name: string } & Partial<Omit<QCarAttributes, 'name'>>) {
-    this.name = init.name
-    this.attr = {
-      ...QCar.createDefaultAttributes(),
-      ...init,
-    }
-  }
-
-  static createDefaultAttributes() {
-    return {
-      name: '新手赛车',
-      type: QCarType.D,
-      description: '',
-      baseSpeed: 183,
-      cBoostSpeed: 252.5,
-      wBoostSpeed: 220.6,
-      cDurationSeconds: 3,
-      wDurationSeconds: 0.59,
-      basePower: 84.7,
-      cBoostPower: 47,
-      wBoostPower: 84.6,
-      wBoostSpeedMultipliers: [0.1, 0.5, 0.3, 0],
-      accelerationSeconds180: 4.18,
-      turnAroundSeconds: 4.02,
-      turnAroundSecondsWithStartUp: 4.12,
-      driftAroundSeconds: 2.06,
-      minSpeedWhileTurnAround: 164.1,
-      adaptabilities: [],
-      driftEnergyEfficiency: 0,
-      skills: [],
-      boostSpouts: 1,
-    } as QCarAttributes
+export class QCar extends QCarBase {
+  constructor(
+    init: ({ name: string } & Partial<Omit<QCarBase, 'name'>>) | QCarBase
+  ) {
+    super(init)
   }
   static newFromNewbieCar() {
     return new QCar({
       name: '新手赛车',
     })
   }
+  extends() {}
 
-  get basePower() {
-    return this.attr.basePower
-  }
-  get cBoostPower() {
-    return this.attr.cBoostPower
-  }
-  get wBoostPower() {
-    return this.attr.wBoostPower
-  }
   /**
    * 剩余基础动力
    * 当速度达到平跑最高速度时，剩余基础动力恒为基础动力的 20%
@@ -138,16 +140,6 @@ export class QCar {
   }
   get cwwBoostPower() {
     return this.combinedPower
-  }
-
-  get baseSpeed() {
-    return this.attr.baseSpeed
-  }
-  get cBoostSpeed() {
-    return this.attr.cBoostSpeed
-  }
-  get wBoostSpeed() {
-    return this.attr.wBoostSpeed
   }
 
   /**
@@ -177,7 +169,7 @@ export class QCar {
   computeWBoostMultiplier(wBoostIndexes: number[]) {
     wBoostIndexes = [...new Set(wBoostIndexes)]
     return wBoostIndexes.reduce(
-      (acc, i) => acc + (this.attr.wBoostSpeedMultipliers[i] || 0),
+      (acc, i) => acc + (this.wBoostSpeedMultipliers[i] || 0),
       0
     )
   }
