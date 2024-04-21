@@ -10,7 +10,7 @@ import {
   QCar,
   QCarAdaptability,
   QCarSkillBounsKind,
-  QCarType,
+  QCarClass,
 } from '@qqspeedm/core/lib/models'
 
 const nbCar = new QCar({
@@ -20,7 +20,7 @@ const nbCar = new QCar({
 
 const tianXingZhe = new QCar({
   name: 'S-天行者',
-  type: QCarType.A,
+  class: QCarClass.A,
   description: '',
   baseSpeed: 202.5,
   cBoostSpeed: 313.9,
@@ -51,7 +51,7 @@ const tianXingZhe = new QCar({
 
 const keJiXianFeng = new QCar({
   name: '科技先锋',
-  type: QCarType.A,
+  class: QCarClass.A,
   description: '',
   baseSpeed: 201.1,
   cBoostSpeed: 271.2,
@@ -85,7 +85,49 @@ const keJiXianFeng = new QCar({
   boostSpouts: 5,
 })
 
-const carList = ref<QCar[]>([nbCar, tianXingZhe, keJiXianFeng])
+const moYingQingLong = new QCar({
+  name: '末影青龙',
+  class: QCarClass.A,
+  description: '',
+  baseSpeed: 204,
+  cBoostSpeed: 279.8,
+  wBoostSpeed: 249.5,
+  cDurationSeconds: 3.12,
+  wDurationSeconds: 0.83,
+  basePower: 103.16,
+  cBoostPower: 70.3,
+  wBoostPower: 112.67,
+  wBoostSpeedMultipliers: [0.1, 0.5, 0.3, 0.225],
+  accelerationSeconds180: 3.025,
+  turnAroundSeconds: 3.94,
+  turnAroundSecondsWithStartUp: 4.04,
+  driftAroundSeconds: 1.95,
+  minSpeedWhileTurnAround: 195.5,
+  adaptabilities: [QCarAdaptability.SORE],
+  driftEnergyEfficiency: 125.908,
+  skills: [
+    {
+      name: '',
+      description:
+        '小喷时长+0.1s。CWW喷后的首个小喷可额外提升最高速度。每秒自动集气3%。每9次使用小喷，7秒内基础速度+8km/s，自动集气翻倍。',
+      bounses: [
+        {
+          kind: QCarSkillBounsKind.ADDITION,
+          attribute: 'wDurationSeconds',
+          value: 0.1,
+        },
+        {
+          kind: QCarSkillBounsKind.ADDITION,
+          attribute: 'baseSpeed',
+          value: 8,
+        },
+      ],
+    },
+  ],
+  boostSpouts: 5,
+})
+
+const carList = ref<QCar[]>([nbCar, tianXingZhe, keJiXianFeng, moYingQingLong])
 </script>
 
 <style scoped lang="sass"></style>
