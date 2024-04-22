@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "run-s build:lib build:preview",
+    "build:preview": "vite build --config vite.preview.config.ts",
+    "build:lib": "vite build --config vite.config.ts"
   },
   "keywords": [],
   "author": "Dragon-Fish <dragon-fish@qq.com>",

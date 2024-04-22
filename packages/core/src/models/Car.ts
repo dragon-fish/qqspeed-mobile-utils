@@ -4,6 +4,7 @@ export interface QCarBase {
   readonly id?: number
   readonly name: string
   isSkin?: boolean
+  primaryView?: string
   class: QCarClass // 赛车等级
   description: string
   baseSpeed: number // 平跑最高速
@@ -31,6 +32,7 @@ export interface QCarBase {
   adaptabilities: QCarAdaptability[] // 适应性
   driftEnergyEfficiency: number // 集气效率
   skills: QCarSkill[] // 特性
+  superECU?: QCarSuperECU[]
   boostSpouts: number // 喷口数量
 }
 
@@ -57,6 +59,8 @@ export class QCarBase {
     return {
       name: '新手赛车',
       class: QCarClass.D,
+      primaryView:
+        'https://patchwiki.biligame.com/images/qqspeed/f/f6/s27qpmjt3uousv6jf5trsvkegibbut0.png',
       description: '',
       baseSpeed: 183,
       cBoostSpeed: 252.5,
@@ -103,15 +107,18 @@ export enum QCarType {
 }
 
 export enum QCarAdaptability {
-  SORE, // 腾空车
-  GRID, // 抓地车
-  STARTUP, // 起步车
-  CHASE, // 后追车
-  DRIFT, // 漂移车
-  TURN, // 转向车
+  SOAR, // 腾空
+  GRIP, // 抓地
+  STARTUP, // 起步
+  CHASE, // 后追
+  DRIFT, // 漂移
+  TURN, // 转向
+  COMBACT, // 实战
+  C_BOOST_MORPH, // 氮气变形
   S_LEAGUE, // S-联赛
   LEGEND, // 联赛传奇
-  NATIONAL_RECORD, // 保有国服记录
+  NATIONAL_RECORD, // 国服
+  MECHA, // 机甲
 }
 
 export interface QCarSkill {
@@ -163,6 +170,31 @@ export class QCar extends QCarBase {
   }
   isTypeOf(type: QCarType) {
     return this.type === type
+  }
+
+  static ADAPTABILITY_NAME_MAP = {
+    [QCarAdaptability.SOAR]: '腾空',
+    [QCarAdaptability.GRIP]: '抓地',
+    [QCarAdaptability.STARTUP]: '起步',
+    [QCarAdaptability.CHASE]: '后追',
+    [QCarAdaptability.DRIFT]: '漂移',
+    [QCarAdaptability.TURN]: '转向',
+    [QCarAdaptability.COMBACT]: '实战',
+    [QCarAdaptability.C_BOOST_MORPH]: '氮气变形',
+    [QCarAdaptability.S_LEAGUE]: 'S-联赛',
+    [QCarAdaptability.LEGEND]: '联赛传奇',
+    [QCarAdaptability.NATIONAL_RECORD]: '国服',
+    [QCarAdaptability.MECHA]: '机甲',
+  }
+  getAdaptabilityNames() {
+    const list = this.adaptabilities.map(
+      (a) => QCar.ADAPTABILITY_NAME_MAP[a] || a
+    )
+    if (this.boostSpouts >= 5) {
+      const num = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+      list.unshift(`${num[this.boostSpouts]}喷`)
+    }
+    return list
   }
 
   /**

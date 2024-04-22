@@ -8,7 +8,10 @@
   "scripts": {
     "dev": "run-p dev:*",
     "dev:core": "pnpm -F core dev",
-    "dev:ui": "pnpm -F ui dev"
+    "dev:ui": "pnpm -F ui dev",
+    "build": "run-s build:*",
+    "build:core": "pnpm -F core build",
+    "build:ui": "pnpm -F ui build"
   },
   "keywords": [],
   "author": "Dragon-Fish <dragon-fish@qq.com>",

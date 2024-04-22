@@ -1,34 +1,67 @@
 <template lang="pug">
-.qq-speed-garage(bg='[url(/images/speedm-garage-common.jpg)] cover' border='1px solid #ccc' p='4' rounded='2' w='full' aspect-ratio="2366/1500" shadow='md' relative overflow='hidden' text='#fff')
+.overflow-auto.qq-speed-garage-wrapper
+  .qq-speed-garage(bg='[url(/images/speedm-garage-common.jpg)] cover' border='1px solid #ccc' p='4' rounded='2' w='full' min-w='600px' aspect-ratio="2366/1500" shadow='md' relative overflow='hidden' text='#fff')
 
-  //- 赛车主视觉图
-  .car-primary-view(absolute bottom='20%' left='25%' w='40%' h='45%')
-    img(:src='`/images/cars/${car.name}.png`' :alt='`${car.name}.png`' w='full' h='full' object-fit='contain' style='background: #f0f6' inline-block)
+    //- 赛车主视觉图
+    .car-primary-view(absolute bottom='15%' left='20%' w='40%' inline-block)
+      img(:src='car.primaryView' :alt='`${car.name}.png`' w='full' h='auto' object-contain align-bottom)
 
-  //- 赛车信息
-  .right-scroll(absolute top='0' right='0' bottom='0' w='480/1280' bg='[rgba(30,41,94,0.5)]' p='4' shadow='md #4c8fbd' border-l='2px solid #4c8fbd' flex='~ col' gap='4')
-    //- 赛车标题
-    h2.car-name-title(m='b-2 x--6' flex='~' items='center' skew='x-[-15deg]')
-      .car-title__class(:class='[`class-${car.class}`]' text='8 italic' bg='#4876fe' p='x-4 y-2') {{ car.class }}
-      .car-title__name(text='italic 5' font="700" m='l-4') {{ car.name }}
+    //- 赛车信息
+    .right-panel(absolute top='0' right='0' bottom='0' w='480/1280' bg='[rgba(30,41,94,0.5)]' p='4' shadow='md #4c8fbd' border-l='2px solid #4c8fbd' flex='~ col' gap='4')
+      //- 赛车标题
+      GarageCarTitle(:car='car')
 
-    //- 简介
-    p {{ car.description || '(暂无简介)' }}
+      //- 简介
+      //- p {{ car.description || '(暂无简介)' }}
 
-    //- 标签以及雷达图
-    .flex(gap='4')
-      .flex-1
-        .adaptabilities-list(flex='~ 1' gap='2')
-          .adaptabilities-tag(v-if='car.adaptabilities?.length' v-for='i in car.adaptabilities' :key='i') {{ adaptabilitieNameMap[i] || '暂无' }}
-          .adaptabilities-tag(v-else) 暂无
+      //- 标签以及雷达图
+      .adaptabilities-list(flex='~ wrap' gap='2')
+        .adaptabilities-tag(v-if='car.adaptabilities?.length' v-for='i in car.getAdaptabilityNames()' :key='i') {{ i }}
+        .adaptabilities-tag(v-else) 暂无
 
-      div(style='flex: 2')
+      div(m='x-auto' w='150px' max-w='full')
         CarPerformanceRadar(:car='car')
+
+      .car-more-scroll(overflow='y-auto' flex='1 ~ col' m='x--4' p='x-4' gap='4')
+        //- 赛车特性
+        .car-super-ecu(v-if='car.superECU?.length')
+          h3(p='y-1' w="50%" text='center' bg='#4876fe' skew='x-[-15deg]' inline-block m='b-2') 超级ECU
+          ul
+            li(v-for='ecu in car.superECU' :key='ecu.name')
+              span(v-if='ecu.name') {{ ecu.name }}:
+              span {{ ecu.description }}
+        .car-skills(v-if='car.skills.length')
+          h3(p='y-1' w="50%" text='center' bg='#4876fe' skew='x-[-15deg]' inline-block m='b-2') 特性
+          ul
+            li(v-for='skill in car.skills' :key='skill.name')
+              span(v-if='skill.name') {{ skill.name }}:
+              span {{ skill.description }}
+
+        .flex-1
+
+        .car-actions.flex
+          .flex-1
+            button 详细数据
+          .flex-1
+            button.primary 获取方式
 </template>
 
 <script setup lang="ts">
 import {} from 'vue'
 import { QCar, QCarAdaptability } from '@qqspeedm/core/lib/models'
+
+const CarPerformanceRadar = defineAsyncComponent({
+  loader: () => import('@/components/Garage/CarPerformanceRadar.vue'),
+  loadingComponent: () =>
+    h(
+      'div',
+      {
+        class:
+          'h-150px w-150px bg-[rgba(255,255,255,0.25)] flex justify-center items-center',
+      },
+      { default: () => '雷达图加载中...' }
+    ),
+})
 
 const props = defineProps<{
   car: QCar
@@ -64,6 +97,10 @@ const speedStatistics = computed(() => {
     {
       label: 'CWW',
       value: car.cwwBoostSpeed,
+    },
+    {
+      label: 'WCWW',
+      value: car.wcwwBoostSpeed,
     },
   ]
   if (car.wBoostSpeedMultipliers && car.wBoostSpeedMultipliers[3]) {
@@ -124,15 +161,6 @@ const adaptabilitieNameMap = {}
 </script>
 
 <style scoped lang="sass">
-.car-name-title
-  background-image: repeating-linear-gradient(-90deg, #1e295ecc, #1e295ecc 2px, #69e8ff22 2px, #69e8ff22 4px)
-  .car-title__class
-    padding-right: 1.5rem
-    background-image: linear-gradient(to left, #69e8ff, #69e8ff 2px, rgba(0,0,0,0) 2px, transparent 8px, #69e8ff 8px, #69e8ff 12px, transparent 12px, transparent 16px, #69e8ff 16px, #4876fe)
-    font-weight: 900
-    &.class-D
-      color: #e2e7ec
-
 .adaptabilities-tag
   display: inline-block
   padding: 0.25rem 0.5rem
@@ -145,4 +173,28 @@ const adaptabilitieNameMap = {}
   text-overflow: ellipsis
   max-width: 100%
   height: auto
+
+.car-actions
+  margin-top: 1rem
+  gap: 1rem
+  button
+    width: 100%
+    padding: 0.5rem
+    border-radius: 0.25rem
+    background-color: #8fa2b8
+    color: #ffffff
+    font-size: 1rem
+    cursor: pointer
+    transition: all 0.25s ease
+    transform: skewX(-15deg)
+    outline: none
+    border: none
+    font-weight: 700
+    &:hover
+      filter: brightness(1.1)
+    &:active
+      filter: brightness(0.9)
+    &.primary
+      background-color: #ffeb40
+      color: #57340f
 </style>
