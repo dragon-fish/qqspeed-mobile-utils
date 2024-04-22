@@ -1,11 +1,9 @@
 <template lang="pug">
 PDialog(
   :visible='show',
-  modal,
-  :draggable='false',
   @update:visible='emit("update:show", $event)',
   :header='`${car.name}：详细数据`',
-  :style='{ width: "640px", maxWidth: "90%" }'
+  :style='{ width: "640px", maxWidth: "90%", maxHeight: "400px" }'
 )
   h3 速度
   PDataTable(:value='speedStatistics')
