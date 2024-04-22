@@ -4,7 +4,7 @@ export interface QCarBase {
   readonly id?: number
   readonly name: string
   isSkin?: boolean
-  type: QCarType // 赛车等级
+  class: QCarClass // 赛车等级
   description: string
   baseSpeed: number // 平跑最高速
   cBoostSpeed: number // 氮气最高速
@@ -36,16 +36,26 @@ export interface QCarBase {
 
 export class QCarBase {
   constructor(init: Partial<QCarBase>) {
+    const validKeys = Object.keys(QCarBase.createDefaultAttributes())
+
+    const initCopy = { ...init }
+    Object.keys(initCopy).forEach((key) => {
+      if (!validKeys.includes(key)) {
+        // @ts-ignore
+        delete initCopy[key]
+      }
+    })
+
     Object.assign(this, {
       ...QCarBase.createDefaultAttributes(),
-      ...init,
+      ...initCopy,
     })
   }
 
   static createDefaultAttributes() {
     return {
       name: '新手赛车',
-      type: QCarType.D,
+      class: QCarClass.D,
       description: '',
       baseSpeed: 183,
       cBoostSpeed: 252.5,
@@ -69,13 +79,26 @@ export class QCarBase {
   }
 }
 
-export enum QCarType {
+export enum QCarClass {
+  // 赛车
   D = 'D',
   C = 'C',
   B = 'B',
   A = 'A',
   T = 'T',
   S = 'S',
+  // 摩托车
+  M1 = 'M1',
+  M2 = 'M2',
+  // 滑板车
+  L1 = 'L1',
+  L2 = 'L2',
+}
+
+export enum QCarType {
+  RACING_CAR,
+  MOTORCYCLE,
+  SKATEBOARD,
 }
 
 export enum QCarAdaptability {
@@ -119,7 +142,24 @@ export class QCar extends QCarBase {
       name: '新手赛车',
     })
   }
-  extends() {}
+  extends(attrs: Partial<QCarBase>) {
+    return new QCar({
+      ...this,
+      ...attrs,
+    })
+  }
+
+  get type() {
+    if ([QCarClass.M1, QCarClass.M2].includes(this.class)) {
+      return QCarType.MOTORCYCLE
+    } else if ([QCarClass.L1, QCarClass.L2].includes(this.class)) {
+      return QCarType.SKATEBOARD
+    }
+    return QCarType.RACING_CAR
+  }
+  isTypeOf(type: QCarType) {
+    return this.type === type
+  }
 
   /**
    * 剩余基础动力
