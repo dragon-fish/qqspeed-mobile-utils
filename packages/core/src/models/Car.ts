@@ -36,7 +36,8 @@ export interface QCarBase {
 
 export class QCarBase {
   constructor(init: Partial<QCarBase>) {
-    const validKeys = Object.keys(QCarBase.createDefaultAttributes())
+    const dafaultCar = QCarBase.createDefaultAttributes()
+    const validKeys = Object.keys(dafaultCar)
 
     const initCopy = { ...init }
     Object.keys(initCopy).forEach((key) => {
@@ -47,7 +48,7 @@ export class QCarBase {
     })
 
     Object.assign(this, {
-      ...QCarBase.createDefaultAttributes(),
+      ...dafaultCar,
       ...initCopy,
     })
   }
@@ -72,7 +73,7 @@ export class QCarBase {
       driftAroundSeconds: 2.06,
       minSpeedWhileTurnAround: 164.1,
       adaptabilities: [],
-      driftEnergyEfficiency: 0,
+      driftEnergyEfficiency: 100,
       skills: [],
       boostSpouts: 1,
     } as QCarBase
@@ -108,6 +109,9 @@ export enum QCarAdaptability {
   CHASE, // 后追车
   DRIFT, // 漂移车
   TURN, // 转向车
+  S_LEAGUE, // S-联赛
+  LEGEND, // 联赛传奇
+  NATIONAL_RECORD, // 保有国服记录
 }
 
 export interface QCarSkill {
