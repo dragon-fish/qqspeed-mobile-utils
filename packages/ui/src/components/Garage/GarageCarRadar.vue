@@ -1,5 +1,5 @@
 <template lang="pug">
-VChart.speedm-car-performance-radar(:option='option' ref='chartRef')
+VChart.speedm-car-performance-radar(:option='option', ref='chartRef')
 </template>
 
 <script setup lang="ts">
@@ -9,14 +9,14 @@ import { type EChartsOption } from 'echarts'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { RadarChart } from 'echarts/charts'
-import { TooltipComponent, LegendComponent } from 'echarts/components'
+import { TooltipComponent } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
 
 const props = defineProps<{
   car: QCar
 }>()
 
-use([CanvasRenderer, RadarChart, TooltipComponent, LegendComponent])
+use([CanvasRenderer, RadarChart, TooltipComponent])
 
 // provide(THEME_KEY, 'dark')
 
@@ -46,7 +46,6 @@ const option = computed<EChartsOption>(() => {
   const totalPersistence = toFixed2(car.cDurationSeconds + car.wDurationSeconds)
 
   return {
-    legend: {},
     tooltip: {
       show: true,
       trigger: 'item',
@@ -62,7 +61,7 @@ const option = computed<EChartsOption>(() => {
         { name: '集气', max: 130, min: 80 },
         { name: '速度', max: 350, min: 240 },
       ],
-      radius: 40,
+      radius: '60%',
       axisName: {
         distance: 10,
       },

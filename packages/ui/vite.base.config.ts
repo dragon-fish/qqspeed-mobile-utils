@@ -3,6 +3,7 @@ import { fileURLToPath, URL } from 'node:url'
 import Vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import { PrimeVueResolver } from 'unplugin-vue-components/resolvers'
 import UnoCSS from 'unocss/vite'
 
 export default defineConfig({
@@ -15,7 +16,13 @@ export default defineConfig({
     }),
     Components({
       dts: 'src/components.d.ts',
-      resolvers: [],
+      resolvers: [
+        PrimeVueResolver({
+          prefix: 'P',
+          importStyle: true,
+          importTheme: 'aura-light-blue',
+        }),
+      ],
     }),
     UnoCSS({}),
   ],

@@ -1,8 +1,13 @@
 <template lang="pug">
 //- 赛车标题
-h2.car-name-title(m='b-2 x--6' flex='~' items='center' skew='x-[-15deg]')
-  .car-title__class(:class='[`class-${car.class}`]' text='8 italic' bg='#4876fe' p='x-4 y-2') {{ car.class }}
-  .car-title__name(text='italic 6' font="700" m='l-4') {{ car.name }}
+h2.car-name-title(m='b-2 x--6', flex='~', items='center', skew='x-[-15deg]')
+  .car-title__class(
+    :class='[`class-${car.class}`]',
+    text='8 italic',
+    bg='#4876fe',
+    p='x-4 y-2'
+  ) {{ car.class }}
+  .car-title__name(text='italic 6', font='700', m='l-4') {{ car.name }}
 </template>
 
 <script setup lang="ts">
