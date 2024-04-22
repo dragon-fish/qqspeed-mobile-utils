@@ -1,17 +1,21 @@
 <template lang="pug">
-.qq-speed-car(prose bg='white' border='1px solid #ccc' p='4' rounded='~' w='400px' max-w='full' shadow='md')
-  h2 {{ car.name }}
-  p {{ car.description || '-' }}
-  h2 速度
-  table
-    tr(v-for='(item, index) in speedStatistics' :key='index')
-      td {{ item.label }}
-      td {{ item.value }}
-  h2 动力
-  table
-    tr(v-for='(item, index) in powerStatistics' :key='index')
-      td {{ item.label }}
-      td {{ item.value }}
+.qq-speed-garage(bg='[url(/images/speedm-garage-common.jpg)] cover' border='1px solid #ccc' p='4' rounded='2' w='full' aspect-ratio="2366/1500" shadow='md' relative overflow='hidden')
+  .right-scroll(absolute top='0' right='0' bottom='0' w='1/3' bg='[rgba(30,41,94,,0.5)]' p='4' rounded='2' shadow='md' overflow='auto')
+    h2
+      .car-class(:class='[`class-${car.class}`]') {{ car.class }}
+      .car-name {{ car.name }}
+    p {{ car.description || '-' }}
+    CarPerformanceRadar(:car='car')
+    h2 速度
+    table
+      tr(v-for='(item, index) in speedStatistics' :key='index')
+        td {{ item.label }}
+        td {{ item.value }}
+    h2 动力
+    table
+      tr(v-for='(item, index) in powerStatistics' :key='index')
+        td {{ item.label }}
+        td {{ item.value }}
 </template>
 
 <script setup lang="ts">

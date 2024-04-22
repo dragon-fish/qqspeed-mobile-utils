@@ -11,17 +11,7 @@ export default defineConfig({
     Vue({}),
     AutoImport({
       dts: 'src/auto-imports.d.ts',
-      imports: [
-        'vue',
-        'pinia',
-        '@vueuse/core',
-        {
-          fexios: [
-            ['Fexios', 'Fexios'],
-            ['default', 'fexios'],
-          ],
-        },
-      ],
+      imports: ['vue', '@vueuse/core'],
       dirs: ['src/components/**', 'src/stores', 'src/utils', 'src/models'],
     }),
     Components({

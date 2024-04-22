@@ -1,6 +1,6 @@
 import App from './App.vue'
 import 'uno.css'
-import '@unocss/reset/normalize.css'
+import './styles/index.sass'
 
 const app = createApp(App)
 

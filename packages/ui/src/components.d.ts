@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    CarPerformanceRadar: typeof import('./components/Garage/CarPerformanceRadar.vue')['default']
     CarUI: typeof import('./components/CarUI/CarUI.vue')['default']
+    Garage: typeof import('./components/Garage/Garage.vue')['default']
   }
 }

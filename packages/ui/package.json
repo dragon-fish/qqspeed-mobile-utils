@@ -34,6 +34,8 @@
   },
   "dependencies": {
     "@qqspeedm/core": "workspace:^",
-    "tslib": "^2.6.2"
+    "echarts": "^5.5.0",
+    "tslib": "^2.6.2",
+    "vue-echarts": "^6.6.10"
   }
 }

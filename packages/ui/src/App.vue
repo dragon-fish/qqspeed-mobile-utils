@@ -1,7 +1,7 @@
 <template lang="pug">
 .app-container
-  div(flex="~" gap='4' wrap='~' justify='center' align='center' p='4' bg='gray-100' min-h='full' max-w='full' shadow='md')
-    CarUI(v-for='i in carList' :car="i")
+  .flex(flex="~ col" gap='4' wrap='~' p='4' bg='gray-100' min-h='full' max-w='full' shadow='md')
+    Garage(v-for='i in carList' :car="i")
 </template>
 
 <script setup lang="ts">
