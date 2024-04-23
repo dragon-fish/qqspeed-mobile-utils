@@ -18,7 +18,7 @@ mw.hook('wikipage.content').add(($content) => {
     const [{ default: JSON5 }, { QQSpeedUI }] = await Promise.all([
       import('https://unpkg.com/json5@2.2.3/dist/index.mjs?module'),
       import(
-        `https://unpkg.com/@qqspeedm/ui@${LIB_VERSION}/dist/index.es.js?module`
+        `https://unpkg.com/@qqspeedm/ui@${LIB_VERSION}?module`
       ),
     ])
     mw.loader.load(
