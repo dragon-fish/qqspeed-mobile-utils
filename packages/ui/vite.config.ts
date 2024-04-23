@@ -8,8 +8,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     lib: {
-      entry: 'src/main.ts',
-      name: 'QQSpeedM',
+      entry: 'src/entry.ts',
+      name: 'LibQQSpeedUI',
       fileName: (format) => `index.${format}.js`,
       formats: ['es', 'umd'],
     },

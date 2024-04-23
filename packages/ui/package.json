@@ -17,6 +17,10 @@
     "dist"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "@prettier/plugin-pug": "^3.0.0",
     "@unocss/extractor-pug": "^0.59.4",

@@ -54,7 +54,7 @@ const tianXingZhe = new QCar({
   minSpeedWhileTurnAround: 193.5,
   adaptabilities: [QCarAdaptability.GRIP],
   driftEnergyEfficiency: 121.78,
-  skills: [
+  perks: [
     {
       name: '',
       description:
@@ -87,7 +87,7 @@ const keJiXianFeng = new QCar({
   minSpeedWhileTurnAround: 191.7,
   adaptabilities: [QCarAdaptability.SOAR],
   driftEnergyEfficiency: 120.278,
-  skills: [
+  perks: [
     {
       name: '',
       description: '每次落地立即获得12%集气且6.5秒内基础速度+10km/s',
@@ -129,7 +129,7 @@ const moYingQingLong = new QCar({
     QCarAdaptability.NATIONAL_RECORD,
   ],
   driftEnergyEfficiency: 125.908,
-  skills: [
+  perks: [
     {
       name: '',
       description:
@@ -175,7 +175,7 @@ const tongYaoXuQu = new QCar({
     // QCarAdaptability.S,
   ],
   driftEnergyEfficiency: 117.825,
-  skills: [
+  perks: [
     {
       name: '',
       description:
