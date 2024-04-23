@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "outDir": "dist",
     "target": "ES3",
+    "sourceMap": false
   },
   "include": ["src", "node_modules/types-mediawiki"]
 }

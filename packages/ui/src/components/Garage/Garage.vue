@@ -1,7 +1,7 @@
 <template lang="pug">
 .overflow-auto.qq-speed-garage-wrapper
   .qq-speed-garage(
-    bg='[url(/images/speedm-garage-common.jpg)] cover',
+    bg='[url(./images/speedm-garage-common.jpg)] cover',
     border='1px solid #ccc',
     p='4',
     rounded='2',

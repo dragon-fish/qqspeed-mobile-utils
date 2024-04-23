@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "vite"
+    "build": "tsc --ignoreDeprecations 5.0"
   },
   "keywords": [],
   "author": "Dragon-Fish <dragon-fish@qq.com>",

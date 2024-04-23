@@ -1,5 +1,5 @@
 import { QQSpeedM } from '@qqspeedm/core'
-import { createApp, h } from 'vue'
+import { createApp, h, ref } from 'vue'
 import 'uno.css'
 import './styles/index.sass'
 import PrimeVue from 'primevue/config'
@@ -18,11 +18,12 @@ export class QQSpeedUI {
   renderGarage(el: HTMLElement, carInit: any) {
     if (!el) throw new Error('Missing element to render garage.')
 
+    el.innerHTML = ''
     el.classList.add('qqspeed-container')
 
-    const car = this.core.createCar(carInit)
+    const car = ref(this.core.createCar(carInit))
     const app = createApp({
-      render: () => h(Garage, { car }),
+      render: () => h(Garage, { car: car.value }),
     })
     this.installPlugins(app)
     app.mount(el)
