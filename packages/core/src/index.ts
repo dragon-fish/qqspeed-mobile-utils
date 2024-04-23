@@ -3,8 +3,11 @@ export { models }
 
 export class QQSpeedM {
   static readonly models = models
+  get models() {
+    return QQSpeedM.models
+  }
 
   createCar(attrs: Partial<models.QCarBase> & { name: string }) {
-    return new QQSpeedM.models.QCar(attrs)
+    return new this.models.QCar(attrs)
   }
 }

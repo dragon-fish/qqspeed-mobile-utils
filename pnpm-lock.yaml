@@ -70,6 +70,9 @@ importers:
       echarts:
         specifier: ^5.5.0
         version: 5.5.0
+      json5:
+        specifier: ^2.2.3
+        version: 2.2.3
       primevue:
         specifier: ^3.51.0
         version: 3.51.0(vue@3.4.23)
@@ -125,6 +128,18 @@ importers:
       vue:
         specifier: ^3.4.23
         version: 3.4.23(typescript@5.4.5)
+
+  packages/wiki-loader:
+    devDependencies:
+      '@qqspeedm/core':
+        specifier: workspace:^
+        version: link:../core
+      types-mediawiki:
+        specifier: ^1.6.0
+        version: 1.6.0
+      vite:
+        specifier: ^5.2.9
+        version: 5.2.9(@types/node@20.12.7)(sass@1.75.0)
 
 packages:
 
@@ -1195,10 +1210,31 @@ packages:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
     dev: true
 
+  /@types/jquery@3.5.29:
+    resolution: {integrity: sha512-oXQQC9X9MOPRrMhPHHOsXqeQDnWeCDT3PelUIg/Oy8FAbzSZtFHRjc7IpbfFVmpLtJ+UOoywpRsuO5Jxjybyeg==}
+    dependencies:
+      '@types/sizzle': 2.3.8
+    dev: true
+
   /@types/node@20.12.7:
     resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
+
+  /@types/oojs-ui@0.46.4:
+    resolution: {integrity: sha512-tpQyPjxr6FhMRNaactbjNXkr4uCsKNQMOVNJiAO5AvzxoPddChNZp4gG37Pm80jAeDP11k9ww4durnEjzqqKsQ==}
+    dependencies:
+      '@types/jquery': 3.5.29
+      '@types/oojs': 7.0.6
+    dev: true
+
+  /@types/oojs@7.0.6:
+    resolution: {integrity: sha512-e6UBEoqJ3bLBvxtPnaFmqkK4HzPwrS3sqfB2dORUmAaShp/T7WhMoYjlwhe+7g748qv7eeX/q4WdOaeeVG2LtA==}
+    dev: true
+
+  /@types/sizzle@2.3.8:
+    resolution: {integrity: sha512-0vWLNK2D5MT9dg0iOo8GlKguPAU02QjmZitPEsXRuJXU/OGIOt9vT9Fc26wtYuavLxtO45v9PGleoL9Z0k1LHg==}
     dev: true
 
   /@types/web-bluetooth@0.0.20:
@@ -2262,7 +2298,6 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
-    dev: true
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -2903,6 +2938,13 @@ packages:
       get-tsconfig: 4.7.3
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
+
+  /types-mediawiki@1.6.0:
+    resolution: {integrity: sha512-qASdGjLzc1Ey20FFnn4KdeZA8hG2RfAxIZtVw7a6XyQplvEIRZPonm50fXRB7PIoN8/iC7tZmz+ge2Nu16lTzQ==}
+    dependencies:
+      '@types/jquery': 3.5.29
+      '@types/oojs-ui': 0.46.4
     dev: true
 
   /typescript-to-lua@1.25.1(typescript@5.4.5):

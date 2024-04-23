@@ -17,6 +17,10 @@ PDialog(
   PDataTable(:value='powerStatistics')
     PColumn(field='label', header='类型')
     PColumn(field='value', header='数值')
+
+  details.m-t-4
+    summary QCarBase
+    pre(overflow-auto, p-2, bg='#efefef', rounded) {{ car.toJSON() }}
 </template>
 
 <script setup lang="ts">

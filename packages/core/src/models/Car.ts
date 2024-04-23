@@ -39,10 +39,10 @@ export interface QCarBase {
 export class QCarBase {
   constructor(init: Partial<QCarBase>) {
     const dafaultCar = QCarBase.createDefaultAttributes()
-    const validKeys = Object.keys(dafaultCar)
+    const validKeys = Reflect.ownKeys(dafaultCar)
 
     const initCopy = { ...init }
-    Object.keys(initCopy).forEach((key) => {
+    Reflect.ownKeys(initCopy).forEach((key) => {
       if (!validKeys.includes(key)) {
         // @ts-ignore
         delete initCopy[key]
@@ -79,6 +79,7 @@ export class QCarBase {
       adaptabilities: [],
       driftEnergyEfficiency: 100,
       skills: [],
+      superECU: [],
       boostSpouts: 1,
     } as QCarBase
   }
@@ -158,6 +159,20 @@ export class QCar extends QCarBase {
       ...this,
       ...attrs,
     })
+  }
+  toJSON() {
+    const validKeys = Reflect.ownKeys(QCarBase.createDefaultAttributes())
+    const obj: any = {}
+    validKeys.forEach((key) => {
+      if (Reflect.has(this, key)) {
+        // @ts-ignore
+        obj[key] = this[key]
+      }
+    })
+    return obj
+  }
+  toString() {
+    return `${this.name} - ${this.class}级赛车`
   }
 
   get type() {
