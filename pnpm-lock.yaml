@@ -111,6 +111,9 @@ importers:
       '@unocss/extractor-pug':
         specifier: ^0.59.4
         version: 0.59.4(pug@3.0.2)
+      '@unocss/preset-rem-to-px':
+        specifier: ^0.59.4
+        version: 0.59.4
       '@unocss/reset':
         specifier: ^0.59.4
         version: 0.59.4
@@ -1402,6 +1405,12 @@ packages:
       '@unocss/core': 0.59.4
       '@unocss/extractor-arbitrary-variants': 0.59.4
       '@unocss/rule-utils': 0.59.4
+    dev: true
+
+  /@unocss/preset-rem-to-px@0.59.4:
+    resolution: {integrity: sha512-TNkF+pS/vNUq3ouhPa+ELK5r71woWPOINJGp93gzH090E14Gj6J/CtIXxOdv7wMKk1Vl+rXFsn04OuL5Ellb0g==}
+    dependencies:
+      '@unocss/core': 0.59.4
     dev: true
 
   /@unocss/preset-tagify@0.59.4:

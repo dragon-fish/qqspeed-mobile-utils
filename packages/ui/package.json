@@ -27,6 +27,7 @@
   "devDependencies": {
     "@prettier/plugin-pug": "^3.0.0",
     "@unocss/extractor-pug": "^0.59.4",
+    "@unocss/preset-rem-to-px": "^0.59.4",
     "@unocss/reset": "^0.59.4",
     "@unocss/transformer-directives": "^0.59.4",
     "@vitejs/plugin-vue": "^5.0.4",

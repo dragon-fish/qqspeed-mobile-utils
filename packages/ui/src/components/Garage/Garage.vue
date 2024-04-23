@@ -65,29 +65,13 @@
           .adaptabilities-tag(v-else) 暂无标签
         //- 赛车特性
         .car-super-ecu(v-if='car.superECU?.length')
-          h3(
-            p='y-1',
-            w='50%',
-            text='center',
-            bg='#4876fe',
-            skew='x-[-15deg]',
-            inline-block,
-            m='b-2'
-          ) 超级ECU
+          h3 超级ECU
           ul
             li(v-for='ecu in car.superECU', :key='ecu.name')
               span(v-if='ecu.name') {{ ecu.name }}:
               span {{ ecu.description }}
         .car-perks(v-if='car.perks.length')
-          h3(
-            p='y-1',
-            w='50%',
-            text='center',
-            bg='#4876fe',
-            skew='x-[-15deg]',
-            inline-block,
-            m='b-2'
-          ) 特性
+          h3 特性
           ul
             li(v-for='skill in car.perks', :key='skill.name')
               span(v-if='skill.name') {{ skill.name }}:
@@ -132,6 +116,16 @@ const togglePurchase = (e: MouseEvent) => purchaseOverlayRef.value?.toggle(e)
 </script>
 
 <style scoped lang="sass">
+.qq-speed-garage
+  h3
+    display: inline-block
+    width: 50%
+    padding: 0.25rem 0
+    text-align: center
+    background-color: #4876fe
+    transform: skewX(-15deg)
+    margin-bottom: 1rem
+
 .adaptabilities-tag
   display: inline-block
   padding: 0.25rem 0.5rem
