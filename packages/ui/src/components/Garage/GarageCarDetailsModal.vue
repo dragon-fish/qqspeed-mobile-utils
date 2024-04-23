@@ -109,21 +109,6 @@ const powerStatistics = computed(() => {
     },
   ]
 })
-
-const allSkillBouns = computed(() => {
-  const car = props.car
-  return car.skills.reduce((acc, skill) => {
-    if (skill.bounses === QCarSkillBounsKind.SPEED) {
-      // acc += skill.bounses.
-    }
-    return acc
-  }, [])
-})
-
-const maxCwwWithEffects = computed(() => {
-  const car = props.car
-  // const
-})
 </script>
 
 <style scoped lang="sass"></style>

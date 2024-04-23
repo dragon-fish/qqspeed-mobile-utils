@@ -3,8 +3,12 @@ import { QGameMode } from './GameMode'
 export interface QCarBase {
   readonly id?: number
   readonly name: string
-  isSkin?: boolean
-  primaryView?: string
+  primaryView: string
+  skins: {
+    name: string
+    image: string
+    perk?: QCarPerk
+  }[]
   class: QCarClass // 赛车等级
   description: string
   baseSpeed: number // 平跑最高速
@@ -31,8 +35,8 @@ export interface QCarBase {
   driftAroundSeconds: number // 漂移一周耗时
   adaptabilities: QCarAdaptability[] // 适应性
   driftEnergyEfficiency: number // 集气效率
-  skills: QCarSkill[] // 特性
-  superECU?: QCarSuperECU[]
+  perks: QCarPerk[] // 特性
+  superECU: QCarSuperECU[]
   boostSpouts: number // 喷口数量
 }
 
@@ -61,6 +65,7 @@ export class QCarBase {
       class: QCarClass.D,
       primaryView:
         'https://patchwiki.biligame.com/images/qqspeed/f/f6/s27qpmjt3uousv6jf5trsvkegibbut0.png',
+      skins: [],
       description: '',
       baseSpeed: 183,
       cBoostSpeed: 252.5,
@@ -78,7 +83,7 @@ export class QCarBase {
       minSpeedWhileTurnAround: 164.1,
       adaptabilities: [],
       driftEnergyEfficiency: 100,
-      skills: [],
+      perks: [],
       superECU: [],
       boostSpouts: 1,
     } as QCarBase
@@ -122,16 +127,15 @@ export enum QCarAdaptability {
   MECHA, // 机甲
 }
 
-export interface QCarSkill {
+export interface QCarPerk {
   icon?: string
   name?: string
   description: string
+  kindOfGameMode?: QGameMode
   bounses?: QCarSkillBouns[]
 }
 
-export interface QCarSuperECU extends QCarSkill {
-  kindOfGameMode: QGameMode
-}
+export interface QCarSuperECU extends QCarPerk {}
 
 export enum QCarSkillBounsKind {
   ADDITION,

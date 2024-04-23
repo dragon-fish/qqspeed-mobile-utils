@@ -78,7 +78,7 @@
             li(v-for='ecu in car.superECU', :key='ecu.name')
               span(v-if='ecu.name') {{ ecu.name }}:
               span {{ ecu.description }}
-        .car-skills(v-if='car.skills.length')
+        .car-perks(v-if='car.perks.length')
           h3(
             p='y-1',
             w='50%',
@@ -89,7 +89,7 @@
             m='b-2'
           ) 特性
           ul
-            li(v-for='skill in car.skills', :key='skill.name')
+            li(v-for='skill in car.perks', :key='skill.name')
               span(v-if='skill.name') {{ skill.name }}:
               span {{ skill.description }}
 

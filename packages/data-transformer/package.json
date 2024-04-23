@@ -1,11 +1,12 @@
 {
-  "name": "@qqspeedm/wiki-loader",
+  "name": "@qqspeedm/data-transformer",
   "version": "0.1.0",
   "description": "",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "vite"
+    "transform": "tsx src/transform.ts",
+    "upload": "tsx src/upload.ts"
   },
   "keywords": [],
   "author": "Dragon-Fish <dragon-fish@qq.com>",
@@ -15,8 +16,10 @@
   "license": "MIT",
   "devDependencies": {
     "@qqspeedm/core": "workspace:^",
-    "tsx": "^4.7.2",
-    "types-mediawiki": "^1.6.0",
-    "vite": "^5.2.9"
+    "dotenv": "^16.4.5",
+    "tsx": "^4.7.2"
+  },
+  "dependencies": {
+    "wiki-saikou": "^3.3.1"
   }
 }
