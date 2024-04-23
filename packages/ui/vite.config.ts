@@ -11,7 +11,7 @@ export default defineConfig({
       entry: 'src/entry.ts',
       name: 'LibQQSpeedUI',
       fileName: (format) => `index.${format}.js`,
-      formats: ['es', 'umd'],
+      formats: ['es', 'umd', 'cjs'],
     },
     sourcemap: true,
   },

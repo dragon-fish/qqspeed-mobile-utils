@@ -1,12 +1,15 @@
 {
   "name": "@qqspeedm/ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
-  "main": "lib/index.js",
   "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "browser": "dist/index.umd.js",
   "scripts": {
     "dev": "vite",
-    "build": "run-s build:lib build:preview",
+    "clear": "rimraf dist lib",
+    "build": "run-s clear build:lib build:preview",
     "build:preview": "vite build --config vite.preview.config.ts",
     "build:lib": "vite build --config vite.config.ts"
   },
@@ -41,7 +44,6 @@
   "dependencies": {
     "@qqspeedm/core": "workspace:^",
     "echarts": "^5.5.0",
-    "json5": "^2.2.3",
     "primevue": "^3.51.0",
     "tslib": "^2.6.2",
     "vue-echarts": "^6.6.10"
